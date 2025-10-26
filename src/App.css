@@ -128,17 +128,22 @@ li{
 }
 
 button{
-  height: 30px;
+  height: 40px;
+  width: 100px;
   border: none;
   border-radius: 10px;
-  background-color: rgb(243, 162, 13);
+  background-color: rgb(218, 75, 182);
   font-size: 10px;
   padding: 10px;
   transition: 0.2s;
+  color: #ddd;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 button:hover{
   transform: scale(1.02);
+  background-color: rgb(224, 103, 194);
 }
 
 .title{
@@ -146,6 +151,7 @@ button:hover{
   font-weight: bold;
   font-size: 30px;
   color: white;
+  margin-left: 350px;
 }
 
 .App{

@@ -1,6 +1,13 @@
 import {LOGO} from "../utils/img.js";
+import { useState } from "react";
 
 function Header(){
+  
+  const [isLoggedIn, setIsLoggedIn] = useState("Login");
+  const log = () => {
+    setIsLoggedIn(isLoggedIn == "Login" ? "Logout" : "Login");
+  }
+  
   return(
     <div className="headerContainer">
       <div className="logo">
@@ -16,7 +23,9 @@ function Header(){
           <li>About</li>
           <li>Contact</li>
           <li>Cart</li>
+          <button onClick={log}>{isLoggedIn}</button>
         </ul>
+        
       </div>
     </div>
   )
