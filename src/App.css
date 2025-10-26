@@ -1,12 +1,17 @@
 .headerContainer {
-  background-color: white;
+  background-color: rgb(111, 36, 160);
   padding: 20px;
-  color: #333;
+  color: #ffffff;
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+li{
+  color: #ffffff;
 }
 
 .logo-img {
