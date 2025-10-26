@@ -1,12 +1,13 @@
-import {REACTLOGO} from "../utils/img.js";
+import {LOGO} from "../utils/img.js";
 
 function Header(){
   return(
     <div className="headerContainer">
       <div className="logo">
-        <img className='logo-img' src={REACTLOGO} alt="React Logo" />
+        <img className='logo-img' src={LOGO} alt="Music Logo" />
       </div>
-      <div>Althaf's Empire
+      <div>
+        <h1 className="title">Tune Quest</h1>
 
       </div>
       <div className="navItems">

@@ -1,18 +1,23 @@
-import {IMAGE} from "../utils/img.js";
-
-function Card({hotelName, place, distance, cuisine, rating}){
-  return(
+function Card({ songName, artist, album, imageUrl, popularity }) {
+  return (
     <div className="card">
-      <div className='img'>
-      <img className='hotel-img' src={IMAGE} alt="Placeholder Image" />
+      <div className="card-image">
+        <img 
+          src={imageUrl || 'https://via.placeholder.com/300'} 
+          alt={songName}
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/300';
+          }}
+        />
       </div>
-       <h3>{hotelName}</h3>
-      <h4>{place}</h4>
-      <h4>{distance}</h4>
-      <h4>{cuisine}</h4>
-      <h4>{rating} ⭐</h4>
+      <div className="card-info">
+        <h2 className="song-title">{songName || 'Unknown Song'}</h2>
+        <p className="artist-name">Artist: {artist || 'Unknown Artist'}</p>
+        <p className="album-name">Album: {album || 'Unknown Album'}</p>
+        {popularity && <p className="popularity">★ {popularity}</p>}
+      </div>
     </div>
-  )
+  );
 }
 
 export default Card;

@@ -1,76 +1,65 @@
+import { useState, useEffect } from "react";
 import Card from "./card";
-// import hotels from "../utils/mockdata.js";
-import {useState} from 'react'
+import ShimmerCard from "./shimmer";
 
+function Body() {
+  const [tracks, setTracks] = useState([]);
+  const [error, setError] = useState(null);
 
-function Body(){
+  useEffect(() => {
+    async function fetchTracks() {
+      try {
+        const res = await fetch("http://localhost:5000/api/songs");
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        console.log('Fetched data:', data);
+        setTracks(data || []); // ensure we always have an array
+      } catch (err) {
+        console.error("Error fetching tracks:", err);
+        setError(err.message);
+      }
+    }
 
-  const [hotels, setHotels] = useState([ {
-    id: 1,
-    hotelName: "The Royal Orchid",
-    place: "Bangalore",
-    distance: "2.5 km from city center",
-    cuisine: "Indian, Continental",
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    hotelName: "Sea Breeze Resort",
-    place: "Goa",
-    distance: "500 m from beach",
-    cuisine: "Seafood, Goan, Italian",
-    rating: 3.9,
-  },
-  {
-    id: 3,
-    hotelName: "Mountain View Lodge",
-    place: "Munnar",
-    distance: "5 km from town",
-    cuisine: "South Indian, Chinese",
-    rating: 3.3,
-  },
-  {
-    id: 4,
-    hotelName: "Cityscape Inn",
-    place: "Mumbai",
-    distance: "1 km from Marine Drive",
-    cuisine: "North Indian, Continental",
-    rating: 4.2,
-  },
-  {
-    id: 5,
-    hotelName: "Sunset Valley Suites",
-    place: "Manali",
-    distance: "3 km from Mall Road",
-    cuisine: "Tandoor, Tibetan, Italian",
-    rating: 4.0,
-  }])
+    fetchTracks();
+  }, []);
 
-  function topRated(){
-    const filtered = hotels.filter(hotel=>hotel.rating>4)
-    setHotels(filtered)
-    console.log(filtered)
-
+  if (error) {
+    return <div>Error loading tracks: {error}</div>;
   }
 
-  
-
-  return(
-    <div className="bodyContainer">
-    <div className='searchbar'>
-      <input type="text" placeholder='Search...' />
-    </div>
-
-     <div className="cards">
-      <div className="button">
-        <button onClick={topRated}>TOP RATED RESTAURANTS</button>
+  if (tracks.length === 0) {
+    return (
+      <>
+      <div className="shimmer-container">
+      <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
+      <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
       </div>
-        {hotels.map(hotel => (
-          <Card key={hotel.id} hotelName={hotel.hotelName} cuisine={hotel.cuisine} place={hotel.place} distance={hotel.distance} rating={hotel.rating} />
+      </>
+    )
+  }
+
+  return (
+    <div className="bodyContainer">
+      <div className="searchbar">
+        <input type="text" placeholder="Search songs..." />
+      </div>
+
+      <div className="cards">
+        {Array.isArray(tracks) && tracks.map((track) => (
+          <Card
+            key={track.id}
+            songName={track.name}
+            artist={track.artist}
+            album={track.album}
+            imageUrl={track.cover}
+            popularity={track.preview ? '⭐' : null}
+          />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default Body;
