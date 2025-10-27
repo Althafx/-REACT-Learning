@@ -1,5 +1,6 @@
 import {LOGO} from "../utils/img.js";
 import { useState } from "react";
+import {Link} from 'react-router-dom'
 
 function Header(){
   
@@ -18,9 +19,9 @@ function Header(){
 
       </div>
       <div className="navItems">
-        <ul>
+        <ul className="nav">
           <li>Home</li>
-          <li>About</li>
+          <Link to="/about"><li>About</li></Link>
           <li>Contact</li>
           <li>Cart</li>
           <button onClick={log}>{isLoggedIn}</button>

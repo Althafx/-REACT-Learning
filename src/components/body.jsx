@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import Card from "./card";
 import ShimmerCard from "./shimmer";
+import { SEARCH } from "../utils/img";
+
 
 function Body() {
   const [tracks, setTracks] = useState([]);
+  const [filteredTracks, setFilteredTracks] = useState([]);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function fetchTracks() {
@@ -40,14 +44,29 @@ function Body() {
     )
   }
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    console.log(searchQuery);
+  }
+  const handleSearchClick = () => {
+    const filteredTracks = tracks.filter((track) => track.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    setFilteredTracks(filteredTracks);
+  }
+
+
+
+
+
   return (
     <div className="bodyContainer">
-      <div className="searchbar">
-        <input type="text" placeholder="Search songs..." />
-      </div>
+
+      <div className="searchContainer">
+        <input className="searchBar" type="text" placeholder="Search songs..." value={searchQuery} onChange={handleSearch} />
+          <button className="searchButton" onClick={handleSearchClick} ></button>
+        </div>
 
       <div className="cards">
-        {Array.isArray(tracks) && tracks.map((track) => (
+      {Array.isArray(filteredTracks.length > 0 ? filteredTracks : tracks) && (filteredTracks.length > 0 ? filteredTracks : tracks).map((track) => (
           <Card
             key={track.id}
             songName={track.name}

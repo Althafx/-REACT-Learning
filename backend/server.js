@@ -56,21 +56,6 @@ app.get("/api/songs", async (req, res) => {
     );
 
     const data = await response.json();
-    
-    // Debug log
-    console.log('Spotify API Response:', data);
-
-    // Check if response has error
-    if (data.error) {
-      console.error('Spotify API Error:', data.error);
-      return res.status(data.error.status || 500).json({ error: data.error.message });
-    }
-
-    // Validate data structure
-    if (!data.tracks || !data.tracks.items) {
-      console.error('Unexpected API response structure:', data);
-      return res.status(500).json({ error: 'Invalid API response structure' });
-    }
 
     // Extract useful info
     const songs = data.tracks.items.map((track) => ({
