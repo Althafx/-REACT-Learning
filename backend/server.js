@@ -47,7 +47,7 @@ app.get("/api/songs", async (req, res) => {
     // You can replace this with any popular playlist ID or search query
     // Example: get 20 pop songs
     const response = await fetch(
-      "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=20",
+      "https://api.spotify.com/v1/search?q=anime&type=track&limit=40",
       {
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -71,6 +71,43 @@ app.get("/api/songs", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
+  }
+});
+
+
+app.get("/api/songs/:id", async (req, res) => {
+  try {
+    const token = await getSpotifyToken();
+    const { id } = req.params;
+
+    const response = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      return res.status(404).json({ error: "Track not found" });
+    }
+
+    const songDetails = {
+      id: data.id,
+      name: data.name,
+      artist: data.artists.map(a => a.name).join(", "),
+      album: data.album.name,
+      releaseDate: data.album.release_date,
+      popularity: data.popularity,
+      imageUrl: data.album.images[0]?.url,
+      previewUrl: data.preview_url,
+      spotifyUrl: data.external_urls.spotify,
+    };
+
+    res.json(songDetails);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch song details" });
   }
 });
 

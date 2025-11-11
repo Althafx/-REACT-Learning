@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "./card";
 import ShimmerCard from "./shimmer";
 import { SEARCH } from "../utils/img";
+import {Link} from 'react-router-dom'
 
 
 function Body() {
@@ -67,14 +68,14 @@ function Body() {
 
       <div className="cards">
       {Array.isArray(filteredTracks.length > 0 ? filteredTracks : tracks) && (filteredTracks.length > 0 ? filteredTracks : tracks).map((track) => (
-          <Card
-            key={track.id}
+          <Link key={track.id} to={`/details/${track.id}`}><Card
+            
             songName={track.name}
             artist={track.artist}
             album={track.album}
             imageUrl={track.cover}
             popularity={track.preview ? '⭐' : null}
-          />
+          /></Link>
         ))}
       </div>
     </div>
