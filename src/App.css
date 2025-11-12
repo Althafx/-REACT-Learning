@@ -371,3 +371,46 @@ audio {
 .spotify-link:hover {
   background: #1ed760;
 }
+
+
+/* loading */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle at top left, #831886 0%, #121212 60%);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #2332bb;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.6);
+}
+
+.loading-text {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  animation: fadeIn 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}

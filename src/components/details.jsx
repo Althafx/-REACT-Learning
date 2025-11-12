@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loading from "./loading";
 
 
 function Details() {
@@ -28,7 +29,7 @@ function Details() {
   }, [id]);
 
   if (error) return <p className="error">❌ {error}</p>;
-  if (!song) return <p className="loading">Loading song details...</p>;
+  if (!song) return <Loading />;
 
   return (
     <div className="details-container">

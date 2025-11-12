@@ -3,6 +3,8 @@ import Card from "./card";
 import ShimmerCard from "./shimmer";
 import { SEARCH } from "../utils/img";
 import {Link} from 'react-router-dom'
+import onlinecheck from "../utils/useOnlineCheck";
+
 
 
 function Body() {
@@ -10,6 +12,9 @@ function Body() {
   const [filteredTracks, setFilteredTracks] = useState([]);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const isOnline = onlinecheck();
+
+
 
   useEffect(() => {
     async function fetchTracks() {
@@ -52,6 +57,10 @@ function Body() {
   const handleSearchClick = () => {
     const filteredTracks = tracks.filter((track) => track.name.toLowerCase().includes(searchQuery.toLowerCase()));
     setFilteredTracks(filteredTracks);
+  }
+
+    if (!isOnline) {
+    return <h1 style={{ textAlign: "center", marginTop: "100px", fontFamily:"-moz-initial", color:"white"}}>⚠️ please check your internet connection...</h1>;
   }
 
 
