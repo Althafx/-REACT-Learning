@@ -121,11 +121,9 @@ li{
 
 }
 
-.button{
-  margin: 20px;
-}
 
-button{
+
+.login{
   height: 40px;
   width: 100px;
   border: none;
@@ -139,10 +137,29 @@ button{
   font-size: 16px;
 }
 
-button:hover{
+.login:hover{
   transform: scale(1.02);
   background-color: rgb(224, 103, 194);
 }
+
+.store{
+  margin-left: 30px;
+  border-radius: 20px;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  transition: 0.2s;
+  padding: 10px;
+  height: 40px;
+  width: 150px;
+}
+
+.store:hover{
+  background-color: #747eda;
+   transform: scale(1.02);
+}
+
+
 
 .title{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -413,4 +430,9 @@ audio {
 @keyframes fadeIn {
   from { opacity: 0.4; }
   to { opacity: 1; }
+}
+
+
+.store{
+  padding: 10px;
 }

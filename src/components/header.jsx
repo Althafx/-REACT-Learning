@@ -14,6 +14,7 @@ function Header(){
     <div className="headerContainer">
       <div className="logo">
         <img className='logo-img' src={LOGO} alt="Music Logo" />
+        <Link to='/store'><button className="store">Vinyl Records Store</button></Link>
       </div>
       <div>
         <h1 className="title">Tune Quest</h1>
@@ -26,7 +27,7 @@ function Header(){
           <Link to="/about"><li>About</li></Link>
           <li>Contact</li>
           <li>Cart</li>
-          <button onClick={log}>{isLoggedIn}</button>
+          <button className="login" onClick={log}>{isLoggedIn}</button>
         </ul>
         
       </div>
