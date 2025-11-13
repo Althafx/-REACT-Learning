@@ -4,39 +4,36 @@ import ShimmerCard from "./shimmer";
 import { SEARCH } from "../utils/img";
 import {Link} from 'react-router-dom'
 import onlinecheck from "../utils/useOnlineCheck";
+import useFetch from "../utils/useFetch.js";
 
 
 
 function Body() {
-  const [tracks, setTracks] = useState([]);
-  const [filteredTracks, setFilteredTracks] = useState([]);
-  const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filteredTracks, setFilteredTracks] = useState([]);
   const isOnline = onlinecheck();
+  const {tracks, error} = useFetch("http://localhost:5000/api/songs")
 
 
 
-  useEffect(() => {
-    async function fetchTracks() {
-      try {
-        const res = await fetch("http://localhost:5000/api/songs");
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
-        console.log('Fetched data:', data);
-        setTracks(data || []); // ensure we always have an array
-      } catch (err) {
-        console.error("Error fetching tracks:", err);
-        setError(err.message);
-      }
-    }
 
-    fetchTracks();
-  }, []);
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    console.log(searchQuery);
+  }
+
+  const handleSearchClick = () => {
+    const filteredTracks = tracks.filter((track) => track.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    setFilteredTracks(filteredTracks);
+  }
+
+  
+  if (!isOnline) {
+    return <h1 style={{ textAlign: "center", marginTop: "100px", fontFamily:"-moz-initial", color:"white"}}>⚠️ please check your internet connection...</h1>;
+  }
 
   if (error) {
-    return <div>Error loading tracks: {error}</div>;
+    return <div>Error loading tracks: {error}</div>;    
   }
 
   if (tracks.length === 0) {
@@ -50,18 +47,8 @@ function Body() {
     )
   }
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    console.log(searchQuery);
-  }
-  const handleSearchClick = () => {
-    const filteredTracks = tracks.filter((track) => track.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    setFilteredTracks(filteredTracks);
-  }
 
-    if (!isOnline) {
-    return <h1 style={{ textAlign: "center", marginTop: "100px", fontFamily:"-moz-initial", color:"white"}}>⚠️ please check your internet connection...</h1>;
-  }
+
 
 
 
