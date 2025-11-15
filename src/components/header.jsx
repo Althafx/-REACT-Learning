@@ -11,17 +11,21 @@ function Header(){
   }
   const check = onlinecheck();
   return(
-    <div className="headerContainer">
-      <div className="logo">
-        <img className='logo-img' src={LOGO} alt="Music Logo" />
-        <Link to='/store'><button className="store">Vinyl Records Store</button></Link>
-      </div>
-      <div>
-        <h1 className="title">Tune Quest</h1>
+    <div className="flex bg-purple-600 justify-between items-center p-4 shadow-lg">
+      
+        <img className='w-12' src={LOGO} alt="Music Logo" />
+        <Link to='/store'><button className="bg-blue-400 p-2 rounded-lg ml-29">Vinyl Records Store</button></Link>
+      
+      <div className="flex-grow text-center">
+
+
+
+        <h1 className="text-4xl text-white font-poppins" >Tune Quest</h1>
+        
 
       </div>
-      <div className="navItems">
-        <ul className="nav">
+      <div className="flex">
+        <ul className="flex text-lg text-white gap-6 items-center">
           <li>{check?"🟢":"🔴"}</li>
           <Link to="/"><li>Home</li></Link>
           <Link to="/about"><li>About</li></Link>

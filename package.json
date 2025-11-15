@@ -11,11 +11,13 @@
     "start": "nodemon --watch src --exec \"npm run dev\""
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.17",
     "cors": "^2.8.5",
     "nodemon": "^3.1.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
