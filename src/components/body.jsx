@@ -37,9 +37,13 @@ function Body() {
   if (tracks.length === 0) {
     return (
       <>
-      <div className="shimmer-container">
+      <div className="flex flex-wrap justify-center m-13 items-center gap-8  mt-30 mb-6 ">
       <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
       <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
+       <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
+       <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
+       <ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/><ShimmerCard/>
+     
       </div>
       </>
     )
