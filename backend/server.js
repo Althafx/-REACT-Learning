@@ -47,7 +47,7 @@ app.get("/api/songs", async (req, res) => {
     // You can replace this with any popular playlist ID or search query
     // Example: get 20 pop songs
     const response = await fetch(
-      "https://api.spotify.com/v1/search?q=anime&type=track&limit=40",
+      "https://api.spotify.com/v1/search?q=songs&type=track&limit=40",
       {
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -58,14 +58,15 @@ app.get("/api/songs", async (req, res) => {
     const data = await response.json();
 
     // Extract useful info
-    const songs = data.tracks.items.map((track) => ({
-      id: track.id,
-      name: track.name,
-      artist: track.artists.map((a) => a.name).join(", "),
-      album: track.album.name,
-      cover: track.album.images[0]?.url || "",
-      preview: track.preview_url, // short audio preview link
-    }));
+  const songs = data.tracks.items.map((track) => ({
+  id: track.id,
+  name: track.name,
+  artist: track.artists.map((a) => a.name).join(", "),
+  album: track.album.name,
+  cover: track.album.images[0]?.url || "",
+  preview: track.preview_url,
+  popularity: track.popularity, // ⭐ ADD THIS
+}));
 
     res.json(songs);
   } catch (err) {

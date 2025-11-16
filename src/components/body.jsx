@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
-import Card from "./card";
+import { useState} from "react";
+import Card,{withBadge}from "./card";
 import ShimmerCard from "./shimmer";
 import {Link} from 'react-router-dom'
 import onlinecheck from "../utils/useOnlineCheck";
 import useFetch from "../utils/useFetch.js";
 import {LOGO} from "../utils/img.js";
+
+
+const PopularityCard = withBadge(Card);
+
+    
 
 
 function Body() {
@@ -65,16 +70,28 @@ function Body() {
         </div>
 
       <div className="flex shadow-2xl flex-wrap justify-center items-center gap-6 mt-6 mb-6">
-      {Array.isArray(filteredTracks.length > 0 ? filteredTracks : tracks) && (filteredTracks.length > 0 ? filteredTracks : tracks).map((track) => (
-          <Link key={track.id} to={`/details/${track.id}`}><Card
-            
-            songName={track.name}
-            artist={track.artist}
-            album={track.album}
-            imageUrl={track.cover}
-            popularity={track.preview ? '⭐' : null}
-          /></Link>
-        ))}
+
+
+
+{(filteredTracks.length > 0 ? filteredTracks : tracks).map((track) => {
+
+  const random = true
+  const ComponentToRender = random ? PopularityCard : Card;
+
+  return (
+    <Link key={track.id} to={`/details/${track.id}`}>
+      <ComponentToRender
+        songName={track.name}
+        artist={track.artist}
+        album={track.album}
+        imageUrl={track.cover}
+        popularity={track.popularity}
+      />
+    </Link>
+  );
+
+})}
+
       </div>
     </div>
   );
